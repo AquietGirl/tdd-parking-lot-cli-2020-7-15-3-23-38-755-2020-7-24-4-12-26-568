@@ -144,4 +144,22 @@ class ParkingBoyFacts {
         //then
         Assertions.assertNull(ticket);
     }
+
+    /*
+    * Given  null car
+    * When  boy parking car
+    * Then  null ticket
+    * */
+    @Test
+    void should_return_null_when_boy_parking_null_car() {
+        //given
+        ParkingBoy parkingBoy = new ParkingBoy();
+        Car car = null;
+
+        //when
+        Ticket ticket = parkingBoy.parkingCar(car);
+
+        //then
+        Assertions.assertNull(ticket);
+    }
 }
