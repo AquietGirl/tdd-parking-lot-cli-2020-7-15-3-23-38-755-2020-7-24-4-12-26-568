@@ -3,6 +3,7 @@ package com.oocl.cultivation;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ParkingBoy {
 
@@ -40,13 +41,8 @@ public class ParkingBoy {
         if (isInvalidTicket(ticket)) {
             return null;
         }
-        Iterator<Ticket> ticketIterator = ticketList.iterator();
-        while (ticketIterator.hasNext()) {
-            Ticket ticketIt = ticketIterator.next();
-            if (ticketIt.getTicketNumber() == ticket.getTicketNumber()) {
-                ticketIterator.remove();
-            }
-        }
+        ticketList.removeIf(ticket1 -> ticket1.getTicketNumber().equals(ticket.getTicketNumber()));
+
         park.setEmptyPositionCount(park.getEmptyPositionCount() + 1);
         return ticket.getCar();
     }
@@ -58,9 +54,6 @@ public class ParkingBoy {
         if (isWrongTicket(ticket)) {
             return true;
         }
-        if (isUsedTicket(ticket)) {
-            return true;
-        }
         return false;
     }
 
@@ -69,20 +62,7 @@ public class ParkingBoy {
     }
 
     private boolean isWrongTicket(Ticket ticket) {
-        for (Ticket ticketEach : ticketList) {
-            if (ticketEach.getTicketNumber() == ticket.getTicketNumber()) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private boolean isUsedTicket(Ticket ticket) {
-        for (Ticket ticketEach : ticketList) {
-            if (ticket.getTicketNumber() == ticket.getTicketNumber()) {
-                return false;
-            }
-        }
-        return true;
+        List<Ticket> tickets = ticketList.stream().filter(ticketEach -> ticketEach.getTicketNumber().equals(ticket.getTicketNumber())).collect(Collectors.toList());
+        return tickets.size() == 0;
     }
 }
