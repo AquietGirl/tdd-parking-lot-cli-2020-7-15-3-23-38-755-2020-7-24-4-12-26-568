@@ -5,6 +5,10 @@ import java.util.Objects;
 public class Car {
     private String carNumber;
 
+    public Car(String carNumber){
+        this.carNumber = carNumber;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

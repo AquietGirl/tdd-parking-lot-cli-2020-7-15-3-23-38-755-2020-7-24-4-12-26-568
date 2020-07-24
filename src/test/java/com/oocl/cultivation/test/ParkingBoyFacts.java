@@ -12,7 +12,7 @@ class ParkingBoyFacts {
     @Test
     void should_return_ticket_when_boy_parking_car() {
         //given
-        Car car = new Car();
+        Car car = new Car("car1");
         ParkingBoy parkingBoy = new ParkingBoy();
         Ticket expectTicket = new Ticket(1);
 
@@ -27,7 +27,7 @@ class ParkingBoyFacts {
     @Test
     void should_car_when_boy_ferching_car() {
         //given
-        Car expectCar = new Car();
+        Car expectCar = new Car("car1");
         ParkingBoy parkingBoy = new ParkingBoy();
         Ticket ticket = new Ticket(1);
 
