@@ -27,6 +27,9 @@ public class ParkingBoy {
                 return null;
             }
         }
+        if(car == null) {
+            return null;
+        }
         Ticket ticket = new Ticket(car.getCarNumber(), car);
         ticketList.add(ticket);
         park.setEmptyPositionCount(park.getEmptyPositionCount() - 1);
