@@ -7,6 +7,13 @@ public class ParkingBoy {
     }
 
     public Car fetchingCar(Ticket ticket) {
+        if (isInvalidTicket()) {
+            return null;
+        }
         return new Car("car1");
+    }
+
+    private boolean isInvalidTicket() {
+        return true;
     }
 }
