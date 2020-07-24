@@ -3,16 +3,11 @@ package com.oocl.cultivation;
 import java.util.Objects;
 
 public class Ticket {
-    private int ticketNumber;
-    public Ticket(int ticketNumber) {
+    private Car car;
+    private String ticketNumber;
+    public Ticket(String ticketNumber, Car car) {
         this.ticketNumber = ticketNumber;
+        this.car = car;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Ticket ticket = (Ticket) o;
-        return ticketNumber == ticket.ticketNumber;
-    }
 }
