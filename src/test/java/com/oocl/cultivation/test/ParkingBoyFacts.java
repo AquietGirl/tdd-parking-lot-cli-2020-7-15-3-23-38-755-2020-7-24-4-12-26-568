@@ -39,7 +39,8 @@ class ParkingBoyFacts {
     void should_return_car_when_boy_fetching_car() {
         //given
         ParkingBoy parkingBoy = new ParkingBoy();
-        Ticket ticket = new Ticket("1", new Car("car1"));
+        Ticket ticket = new Ticket("car1", new Car("car1"));
+        parkingBoy.parkingCar(new Car("car1"));
 
         //when
         Car actualCar = parkingBoy.fetchingCar(ticket);
@@ -49,19 +50,20 @@ class ParkingBoyFacts {
     }
 
     /*
-    * Given  wrong ticket boy
-    * When   boy fetching car
-    * Then   null car
-    *
-    * Given  no ticket boy
-    * When  boy fetching car
-    * Then  null car
-    * */
+     * Given  wrong ticket boy
+     * When   boy fetching car
+     * Then   null car
+     *
+     * Given  no ticket boy
+     * When  boy fetching car
+     * Then  null car
+     * */
     @Test
     void should_return_null_when_boy_fetching_car_given_wrong_ticket() {
         //given
         ParkingBoy parkingBoy = new ParkingBoy();
-        Ticket ticket = new Ticket("1", new Car("car1"));
+        Ticket ticket = new Ticket("2", new Car("car1"));
+        parkingBoy.parkingCar(new Car("car1"));
 
         //when
         Car actualCar = parkingBoy.fetchingCar(ticket);
