@@ -7,6 +7,6 @@ public class ParkingBoy {
     }
 
     public Car fetchingCar(Ticket ticket) {
-        return null;
+        return new Car("car1");
     }
 }
