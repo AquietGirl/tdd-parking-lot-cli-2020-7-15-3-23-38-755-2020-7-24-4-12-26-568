@@ -85,4 +85,25 @@ class ParkingBoyFacts {
         Assertions.assertNull(actualCar);
     }
 
+
+    /*
+    * Given  used ticket boy
+    * When  boy fetching car
+    * Then  null car
+    * */
+    @Test
+    void should_return_null_when_boy_fetching_car_given_used_ticket() {
+        //given
+        ParkingBoy parkingBoy = new ParkingBoy();
+        Car car = new Car("car1");
+        Ticket ticket = parkingBoy.parkingCar(car);
+        parkingBoy.fetchingCar(ticket);
+        Ticket usedTicket = new Ticket("car1", car);
+
+        //when
+        Car actualCar = parkingBoy.fetchingCar(usedTicket);
+
+        //then
+        Assertions.assertNull(actualCar);
+    }
 }
