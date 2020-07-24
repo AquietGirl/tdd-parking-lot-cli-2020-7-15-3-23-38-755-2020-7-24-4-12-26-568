@@ -117,6 +117,7 @@ class ParkingBoyFacts {
         //given
         ParkingBoy parkingBoy = new ParkingBoy();
         Car car = new Car("car1");
+        parkingBoy.getPark().setEmptyPositionCount(0);
 
         //when
         Ticket ticket = parkingBoy.parkingCar(car);
