@@ -2,6 +2,7 @@ package com.oocl.cultivation;
 
 import java.awt.font.TextHitInfo;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class ParkingBoy {
@@ -22,7 +23,16 @@ public class ParkingBoy {
         if (isInvalidTicket(ticket)) {
             return null;
         }
-        return new Car("car1");
+        Iterator<Ticket> ticketIterator = ticketList.iterator();
+        while (ticketIterator.hasNext())
+        {
+            Ticket ticketIt= ticketIterator.next();
+            if (ticketIt.getTicketNumber() == ticket.getTicketNumber())
+            {
+                ticketIterator.remove();
+            }
+        }
+        return ticket.getCar();
     }
 
     private boolean isInvalidTicket(Ticket ticket) {
@@ -30,6 +40,9 @@ public class ParkingBoy {
             return true;
         }
         if (isWrongTicket(ticket)) {
+            return true;
+        }
+        if (isUsedTicket(ticket)) {
             return true;
         }
         return false;
@@ -42,6 +55,15 @@ public class ParkingBoy {
     private boolean isWrongTicket(Ticket ticket) {
         for (Ticket ticketEach: ticketList){
             if (ticketEach.getTicketNumber() == ticket.getTicketNumber()){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean isUsedTicket(Ticket ticket) {
+        for (Ticket ticketEach: ticketList) {
+            if (ticket.getTicketNumber() == ticket.getTicketNumber()) {
                 return false;
             }
         }
