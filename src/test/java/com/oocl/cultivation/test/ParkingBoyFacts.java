@@ -22,4 +22,19 @@ class ParkingBoyFacts {
         //then
         Assertions.assertEquals(expectTicket, actualTicket);
     }
+
+
+    @Test
+    void should_car_when_boy_ferching_car() {
+        //given
+        Car expectCar = new Car();
+        ParkingBoy parkingBoy = new ParkingBoy();
+        Ticket ticket = new Ticket(1);
+
+        //when
+        Car actualCar = parkingBoy.fetchingCar(ticket);
+
+        //then
+        Assertions.assertEquals(expectCar, actualCar);
+    }
 }
