@@ -10,6 +10,7 @@ public class ParkingBoy {
     private List<Ticket> ticketList;
     private Park park;
     private String ticketMessage;
+    private String parkMessage;
 
     public ParkingBoy() {
         ticketList = new ArrayList<>();
@@ -50,6 +51,10 @@ public class ParkingBoy {
 
     public String getTicketMessage() {
         return ticketMessage;
+    }
+
+    public String getParkMessage() {
+        return null;
     }
 
     private boolean isInvalidTicket(Ticket ticket) {

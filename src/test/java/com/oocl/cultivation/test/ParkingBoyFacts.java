@@ -215,4 +215,23 @@ class ParkingBoyFacts {
         //then
         Assertions.assertEquals("Please provide your parking ticket.", message);
     }
+
+    /*
+    * Given  car
+    * When  boy parking car but no position
+    * Then  return "Not enough position."
+    * */
+    @Test
+    void should_return_not_enough_position_when_boy_parking_car_but_not_position_given_car() {
+        //given
+        ParkingBoy parkingBoy = new ParkingBoy();
+        parkingBoy.getPark().setEmptyPositionCount(0);
+        parkingBoy.parkingCar(new Car("car1"));
+
+        //when
+        String message = parkingBoy.getParkMessage();
+
+        //then
+        Assertions.assertEquals("Not enough position.", message);
+    }
 }
