@@ -195,4 +195,24 @@ class ParkingBoyFacts {
         //then
         Assertions.assertEquals("Unrecognized parking ticket.", message);
     }
+
+
+    /*
+     * Given  no ticket boy
+     * When  boy fetching car
+     * Then  return "Please provide your parking ticket."
+     * */
+    @Test
+    void should_return_please_provide_your_parking_ticket_when_boy_fetching_car_given_no_ticket() {
+        //given
+        ParkingBoy parkingBoy = new ParkingBoy();
+        Ticket ticket = null;
+        parkingBoy.fetchingCar(ticket);
+
+        //when
+        String message = parkingBoy.getTicketMessage();
+
+        //then
+        Assertions.assertEquals("Please provide your parking ticket.", message);
+    }
 }
