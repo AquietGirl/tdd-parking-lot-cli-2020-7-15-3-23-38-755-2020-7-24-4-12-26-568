@@ -268,6 +268,6 @@ class ParkingBoyFacts {
         Ticket ticket = smartParkingBoy.parkingCar(car);
 
         //then
-        Assertions.assertEquals("part1", ticket.getPark().getParkName());
+        Assertions.assertEquals("park1", ticket.getPark().getParkName());
     }
 }

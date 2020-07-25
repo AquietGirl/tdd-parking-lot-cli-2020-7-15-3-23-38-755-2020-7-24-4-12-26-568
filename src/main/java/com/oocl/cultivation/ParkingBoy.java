@@ -2,6 +2,7 @@ package com.oocl.cultivation;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public abstract class ParkingBoy{
@@ -44,7 +45,23 @@ public abstract class ParkingBoy{
 
     public abstract Ticket parkingCar(Car car);
 
-    public abstract Car fetchingCar(Ticket ticket);
+    public Car fetchingCar(Ticket ticket) {
+        if (isInvalidTicket(ticket)) {
+            return null;
+        }
+        ticketList.removeIf(ticketEach -> ticketEach.getTicketNumber().equals(ticket.getTicketNumber()));
+        Optional<Park> resultPark = this.getParkList().stream().filter(park -> park.getParkName().equals(ticket.getPark().getParkName())).findFirst();
+        if (resultPark.isPresent()) {
+            Park park = resultPark.get();
+            park.setEmptyPositionCount(park.getEmptyPositionCount() + 1);
+        }
+        for (Park park: parkList) {
+            if (ticket.getPark().getParkName().equals(park.getParkName())) {
+                park.setEmptyPositionCount(park.getEmptyPositionCount() + 1);
+            }
+        }
+        return ticket.getCar();
+    }
 
     public boolean isCanParkingCar(Car car) {
         return car != null && !isParked(car);
@@ -64,7 +81,7 @@ public abstract class ParkingBoy{
         return true;
     }
 
-    public boolean isInvalidTicket(Ticket ticket) {
+    private boolean isInvalidTicket(Ticket ticket) {
         if (isNoTicket(ticket)) {
             ticketMessage = "Please provide your parking ticket.";
             return true;
