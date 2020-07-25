@@ -54,6 +54,7 @@ public class ParkingBoy {
 
     private boolean isInvalidTicket(Ticket ticket) {
         if (isNoTicket(ticket)) {
+            ticketMessage = "Please provide your parking ticket.";
             return true;
         }
         if (isWrongTicket(ticket)) {
