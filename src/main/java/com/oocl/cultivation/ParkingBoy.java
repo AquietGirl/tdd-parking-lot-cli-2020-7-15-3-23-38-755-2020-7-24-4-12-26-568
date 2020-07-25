@@ -49,7 +49,7 @@ public class ParkingBoy {
     }
 
     public String getTicketMessage() {
-        return null;
+        return ticketMessage;
     }
 
     private boolean isInvalidTicket(Ticket ticket) {
@@ -57,6 +57,7 @@ public class ParkingBoy {
             return true;
         }
         if (isWrongTicket(ticket)) {
+            ticketMessage = "Unrecognized parking ticket.";
             return true;
         }
         return false;
