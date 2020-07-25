@@ -2,9 +2,11 @@ package com.oocl.cultivation;
 
 public class Park {
     private int emptyPositionCount;
+    private String parkName;
 
-    public Park () {
+    public Park (String parkName) {
         this.emptyPositionCount = 10;
+        this.parkName = parkName;
     }
 
     public int getEmptyPositionCount() {
@@ -13,5 +15,9 @@ public class Park {
 
     public void setEmptyPositionCount(int emptyPositionCount) {
         this.emptyPositionCount = emptyPositionCount;
+    }
+
+    public String getParkName() {
+        return parkName;
     }
 }

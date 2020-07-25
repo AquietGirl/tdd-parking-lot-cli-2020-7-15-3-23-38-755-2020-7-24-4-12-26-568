@@ -1,6 +1,7 @@
 package com.oocl.cultivation.test;
 
 import com.oocl.cultivation.Car;
+import com.oocl.cultivation.Park;
 import com.oocl.cultivation.ParkingBoy;
 import com.oocl.cultivation.Ticket;
 import org.junit.jupiter.api.Assertions;
@@ -34,7 +35,7 @@ class ParkingBoyFacts {
     void should_return_car_when_boy_fetching_car() {
         //given
         ParkingBoy parkingBoy = new ParkingBoy();
-        Ticket ticket = new Ticket("car1", new Car("car1"));
+        Ticket ticket = new Ticket("car1", new Car("car1"), new Park("park1"));
         parkingBoy.parkingCar(new Car("car1"));
 
         //when
@@ -45,10 +46,10 @@ class ParkingBoyFacts {
     }
 
     /*
-    * Given  ticket boy
-    * When  boy fetching car
-    * Then  correspond car
-    * */
+     * Given  ticket boy
+     * When  boy fetching car
+     * Then  correspond car
+     * */
     @Test
     void should_return_correspond_when_boy_fetching_car() {
         //given
@@ -76,7 +77,7 @@ class ParkingBoyFacts {
     void should_return_null_when_boy_fetching_car_given_wrong_ticket() {
         //given
         ParkingBoy parkingBoy = new ParkingBoy();
-        Ticket ticket = new Ticket("2", new Car("car1"));
+        Ticket ticket = new Ticket("2", new Car("car1"), new Park("park1"));
         parkingBoy.parkingCar(new Car("car1"));
 
         //when
@@ -101,10 +102,10 @@ class ParkingBoyFacts {
 
 
     /*
-    * Given  used ticket boy
-    * When  boy fetching car
-    * Then  null car
-    * */
+     * Given  used ticket boy
+     * When  boy fetching car
+     * Then  null car
+     * */
     @Test
     void should_return_null_when_boy_fetching_car_given_used_ticket() {
         //given
@@ -121,16 +122,16 @@ class ParkingBoyFacts {
     }
 
     /*
-    * Given car boy
-    * When boy parking car but parking is no position
-    * Then null ticket
-    * */
+     * Given car boy
+     * When boy parking car but parking is no position
+     * Then null ticket
+     * */
     @Test
     void should_return_null_when_boy_parking_car_but_no_position() {
         //given
         ParkingBoy parkingBoy = new ParkingBoy();
         Car car = new Car("car1");
-        parkingBoy.getPark().setEmptyPositionCount(0);
+        parkingBoy.getParkList().forEach(park -> park.setEmptyPositionCount(0));
 
         //when
         Ticket ticket = parkingBoy.parkingCar(car);
@@ -140,10 +141,10 @@ class ParkingBoyFacts {
     }
 
     /*
-    * Given  car in parking boy
-    * When   boy parking car
-    * Then   null ticket
-    * */
+     * Given  car in parking boy
+     * When   boy parking car
+     * Then   null ticket
+     * */
     @Test
     void should_return_null_when_boy_parking_parked_car() {
         //given
@@ -159,10 +160,10 @@ class ParkingBoyFacts {
     }
 
     /*
-    * Given  null car
-    * When  boy parking car
-    * Then  null ticket
-    * */
+     * Given  null car
+     * When  boy parking car
+     * Then  null ticket
+     * */
     @Test
     void should_return_null_when_boy_parking_null_car() {
         //given
@@ -177,15 +178,15 @@ class ParkingBoyFacts {
     }
 
     /*
-    * Given  wrong ticket
-    * When  boy fetching car
-    * Then  return "Unrecognized parking ticket."
-    * */
+     * Given  wrong ticket
+     * When  boy fetching car
+     * Then  return "Unrecognized parking ticket."
+     * */
     @Test
-    void should_return_unrecognized_parking_ticket_when_boy_fetching_car_given_wrong_ticket(){
+    void should_return_unrecognized_parking_ticket_when_boy_fetching_car_given_wrong_ticket() {
         //given
         ParkingBoy parkingBoy = new ParkingBoy();
-        Ticket ticket = new Ticket("2", new Car("car1"));
+        Ticket ticket = new Ticket("2", new Car("car1"), new Park("park1"));
         parkingBoy.fetchingCar(ticket);
 
         //when
@@ -216,15 +217,15 @@ class ParkingBoyFacts {
     }
 
     /*
-    * Given  car
-    * When  boy parking car but no position
-    * Then  return "Not enough position."
-    * */
+     * Given  car
+     * When  boy parking car but no position
+     * Then  return "Not enough position."
+     * */
     @Test
     void should_return_not_enough_position_when_boy_parking_car_but_not_position_given_car() {
         //given
         ParkingBoy parkingBoy = new ParkingBoy();
-        parkingBoy.getPark().setEmptyPositionCount(0);
+        parkingBoy.getParkList().forEach(park -> park.setEmptyPositionCount(0));
         parkingBoy.parkingCar(new Car("car1"));
 
         //when
@@ -232,5 +233,24 @@ class ParkingBoyFacts {
 
         //then
         Assertions.assertEquals("Not enough position.", message);
+    }
+
+    /*
+     * Given  car
+     * When  boy parking car but park1 is full
+     * Then  parking car to park2
+     * */
+    @Test
+    void should_return_car_in_park2_when_boy_parking_car_but_park1_is_full_given_car() {
+        //given
+        ParkingBoy parkingBoy = new ParkingBoy();
+        Car car = new Car("car1");
+        parkingBoy.getParkList().get(0).setEmptyPositionCount(0);
+
+        //when
+        Ticket ticket = parkingBoy.parkingCar(car);
+
+        //then
+        Assertions.assertEquals("park2", ticket.getPark().getParkName());
     }
 }

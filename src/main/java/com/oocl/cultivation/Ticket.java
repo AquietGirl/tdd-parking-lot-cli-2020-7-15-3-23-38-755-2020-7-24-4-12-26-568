@@ -4,10 +4,12 @@ package com.oocl.cultivation;
 public class Ticket {
     private Car car;
     private String ticketNumber;
+    private Park park;
 
-    public Ticket(String ticketNumber, Car car) {
+    public Ticket(String ticketNumber, Car car, Park park) {
         this.ticketNumber = ticketNumber;
         this.car = car;
+        this.park = park;
     }
 
     public String getTicketNumber() {
@@ -18,5 +20,5 @@ public class Ticket {
         return car;
     }
 
-
+    public Park getPark() {return park;}
 }
