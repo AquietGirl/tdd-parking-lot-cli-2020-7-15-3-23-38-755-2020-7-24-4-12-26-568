@@ -176,4 +176,23 @@ class ParkingBoyFacts {
         //then
         Assertions.assertNull(ticket);
     }
+
+    /*
+    * Given  wrong ticket
+    * When  boy fetching car
+    * Then  return "Unrecognized parking ticket."
+    * */
+    @Test
+    void should_return_unrecognized_parking_ticket_when_boy_fetching_car_given_wrong_ticket(){
+        //given
+        ParkingBoy parkingBoy = new ParkingBoy();
+        Ticket ticket = new Ticket("2", new Car("car1"));
+        parkingBoy.fetchingCar(ticket);
+
+        //when
+        String message = parkingBoy.getTicketMessage();
+
+        //then
+        Assertions.assertEquals("Unrecognized parking ticket.", message);
+    }
 }

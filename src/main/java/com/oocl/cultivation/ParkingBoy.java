@@ -9,6 +9,7 @@ public class ParkingBoy {
 
     private List<Ticket> ticketList;
     private Park park;
+    private String ticketMessage;
 
     public ParkingBoy() {
         ticketList = new ArrayList<>();
@@ -45,6 +46,10 @@ public class ParkingBoy {
 
         park.setEmptyPositionCount(park.getEmptyPositionCount() + 1);
         return ticket.getCar();
+    }
+
+    public String getTicketMessage() {
+        return null;
     }
 
     private boolean isInvalidTicket(Ticket ticket) {
