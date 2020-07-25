@@ -6,11 +6,6 @@ import com.oocl.cultivation.Ticket;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 class ParkingBoyFacts {
     /*
      Given  1car 1boy
@@ -47,6 +42,25 @@ class ParkingBoyFacts {
 
         //then
         Assertions.assertNotNull(actualCar);
+    }
+
+    /*
+    * Given  ticket boy
+    * When  boy fetching car
+    * Then  correspond car
+    * */
+    @Test
+    void should_return_correspond_when_boy_fetching_car() {
+        //given
+        ParkingBoy parkingBoy = new ParkingBoy();
+        Car car = new Car("car1");
+        Ticket ticket = parkingBoy.parkingCar(car);
+
+        //when
+        Car actualCar = parkingBoy.fetchingCar(ticket);
+
+        //then
+        Assertions.assertEquals(car.getCarNumber(), actualCar.getCarNumber());
     }
 
     /*
