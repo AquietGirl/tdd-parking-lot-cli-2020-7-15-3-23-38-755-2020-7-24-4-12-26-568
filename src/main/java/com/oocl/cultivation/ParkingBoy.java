@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public abstract class ParkingBoy{
+public abstract class ParkingBoy {
 
     private List<Ticket> ticketList;
     private List<Park> parkList;
@@ -55,7 +55,7 @@ public abstract class ParkingBoy{
             Park park = resultPark.get();
             park.setEmptyPositionCount(park.getEmptyPositionCount() + 1);
         }
-        for (Park park: parkList) {
+        for (Park park : parkList) {
             if (ticket.getPark().getParkName().equals(park.getParkName())) {
                 park.setEmptyPositionCount(park.getEmptyPositionCount() + 1);
             }
@@ -64,7 +64,7 @@ public abstract class ParkingBoy{
     }
 
     public boolean isCanParkingCar(Car car) {
-        return car != null && !isParked(car);
+        return car != null && !isParked(car) && hasCarPosition();
     }
 
     private boolean isParked(Car car) {
@@ -72,13 +72,13 @@ public abstract class ParkingBoy{
         return tickets.size() != 0;
     }
 
-
-    public boolean hasCarPosition(Park park) {
-        if (park.getEmptyPositionCount() == 0){
-            parkMessage = "Not enough position.";
-            return false;
+    private boolean hasCarPosition() {
+        List<Park> parks = parkList.stream().filter(park -> park.getEmptyPositionCount() != 0).collect(Collectors.toList());
+        if (parks.size() > 0) {
+            return true;
         }
-        return true;
+        parkMessage = "Not enough position.";
+        return false;
     }
 
     private boolean isInvalidTicket(Ticket ticket) {
