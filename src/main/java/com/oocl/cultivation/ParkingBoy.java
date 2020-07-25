@@ -21,17 +21,16 @@ public class ParkingBoy {
         return park;
     }
 
+    public String getTicketMessage() {
+        return ticketMessage;
+    }
+
+    public String getParkMessage() {
+        return parkMessage;
+    }
+
     public Ticket parkingCar(Car car) {
-        if (park.getEmptyPositionCount() == 0){
-            parkMessage = "Not enough position.";
-            return null;
-        }
-        for (Ticket ticketEach: ticketList) {
-            if (ticketEach.getCar()==car){
-                return null;
-            }
-        }
-        if(car == null) {
+        if (!isCanParkingCar(car)) {
             return null;
         }
         Ticket ticket = new Ticket(car.getCarNumber(), car);
@@ -50,12 +49,27 @@ public class ParkingBoy {
         return ticket.getCar();
     }
 
-    public String getTicketMessage() {
-        return ticketMessage;
+    private boolean isCanParkingCar(Car car) {
+        if (car == null || isParked(car)) {
+            return false;
+        }
+        if (!hasCarPosition()) {
+            return false;
+        }
+        return true;
     }
 
-    public String getParkMessage() {
-        return parkMessage;
+    private boolean hasCarPosition() {
+        if (park.getEmptyPositionCount() == 0){
+            parkMessage = "Not enough position.";
+            return false;
+        }
+        return true;
+    }
+
+    private boolean isParked(Car car) {
+        List<Ticket> tickets = ticketList.stream().filter(ticket -> ticket.getCar() == car).collect(Collectors.toList());
+        return tickets.size() != 0;
     }
 
     private boolean isInvalidTicket(Ticket ticket) {
