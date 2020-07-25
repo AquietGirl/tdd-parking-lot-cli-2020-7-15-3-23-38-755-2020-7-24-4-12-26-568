@@ -23,6 +23,7 @@ public class ParkingBoy {
 
     public Ticket parkingCar(Car car) {
         if (park.getEmptyPositionCount() == 0){
+            parkMessage = "Not enough position.";
             return null;
         }
         for (Ticket ticketEach: ticketList) {
@@ -54,7 +55,7 @@ public class ParkingBoy {
     }
 
     public String getParkMessage() {
-        return null;
+        return parkMessage;
     }
 
     private boolean isInvalidTicket(Ticket ticket) {
