@@ -112,10 +112,9 @@ class ParkingBoyFacts {
         Car car = new Car("car1");
         Ticket ticket = parkingBoy.parkingCar(car);
         parkingBoy.fetchingCar(ticket);
-        Ticket usedTicket = new Ticket("car1", car);
 
         //when
-        Car actualCar = parkingBoy.fetchingCar(usedTicket);
+        Car actualCar = parkingBoy.fetchingCar(ticket);
 
         //then
         Assertions.assertNull(actualCar);
