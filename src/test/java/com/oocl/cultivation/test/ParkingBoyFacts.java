@@ -296,7 +296,7 @@ class ParkingBoyFacts {
         ParkingBoy superParkingBoy = new SuperSmartParkingBoy(defaultParkCount(2));
         Car car = new Car("car1");
         superParkingBoy.getParkList().get(0).setEmptyPositionCount(3);
-        superParkingBoy.getParkList().get(1).setEmptyPositionCount(5);
+        superParkingBoy.getParkList().get(1).setEmptyPositionCount(3);
 
         //when
         Ticket ticket = superParkingBoy.parkingCar(car);

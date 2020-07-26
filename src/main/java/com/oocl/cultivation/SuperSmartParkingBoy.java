@@ -10,22 +10,19 @@ public class SuperSmartParkingBoy extends ParkingBoy {
     }
 
     @Override
-    public Ticket parkingCar(Car car) {
+    public Park choosePark(Car car) {
         if (isCanParkingCar(car)) {
             Optional<Park> parks = this.getParkList().stream().reduce((x, y) -> {
                 int rateX = (x.getEmptyPositionCount() / x.getCapacity());
                 int rateY = (y.getEmptyPositionCount() / y.getCapacity());
                 return rateX > rateY ? x : y;
             });
-            if (parks.isPresent()){
-                Park morePositionPark = parks.get();
-                Ticket ticket = new Ticket(car.getCarNumber(), car, morePositionPark);
-                this.getTicketList().add(ticket);
-                morePositionPark.setEmptyPositionCount(morePositionPark.getEmptyPositionCount() - 1);
-                return ticket;
+            if (parks.isPresent()) {
+                Park highAvailableRatePark = parks.get();
+                return highAvailableRatePark;
             }
-
         }
         return null;
     }
+
 }

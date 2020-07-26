@@ -41,7 +41,20 @@ public abstract class ParkingBoy {
         return parkList;
     }
 
-    public abstract Ticket parkingCar(Car car);
+    public abstract Park choosePark(Car car);
+
+    public Ticket parkingCar(Car car) {
+        Park park = choosePark(car);
+        if (park != null) {
+            Ticket ticket = new Ticket(car.getCarNumber(), car, park);
+            this.getTicketList().add(ticket);
+            park.setEmptyPositionCount(park.getEmptyPositionCount() - 1);
+            return ticket;
+        }
+        return null;
+    }
+
+    ;
 
     public Car fetchingCar(Ticket ticket) {
         if (isInvalidTicket(ticket)) {
