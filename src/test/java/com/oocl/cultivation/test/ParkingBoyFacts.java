@@ -65,6 +65,28 @@ class ParkingBoyFacts {
         Assertions.assertNotNull(actualCar);
     }
 
+
+    /*
+     * Given  multiple car boy
+     * When   boy fetching car
+     * Then   multiple ticket
+     * */
+    @Test
+    void should_return_multiple_tickets_when_boy_fetching_car_given_multiple_cars(){
+        //given
+        ParkingBoy parkingBoy = defaultParkingBoy();
+        Car car1 = new Car("car1");
+        Car car2 = new Car("car2");
+
+        //when
+        List<Ticket> tickets = new ArrayList<>();
+        tickets.add(parkingBoy.parkingCar(car1));
+        tickets.add(parkingBoy.parkingCar(car2));
+
+        //then
+        Assertions.assertEquals(2, tickets.size());
+    }
+
     /*
      * Given  ticket boy
      * When  boy fetching car
