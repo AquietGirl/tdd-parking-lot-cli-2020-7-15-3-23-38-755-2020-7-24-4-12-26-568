@@ -11,10 +11,10 @@ public class NoSmartParkingBoy extends ParkingBoy {
 
     @Override
     public Park choosePark(Car car) {
-        if (isCanParkingCar(car)) {
-            Optional<Park> resultPark = this.getParkList().stream().filter(park -> park.getEmptyPositionCount() != 0).findFirst();
-            Park park = resultPark.get();
-            return park;
+        Optional<Park> resultPark = this.getParkList().stream().filter(park -> park.getEmptyPositionCount() != 0).findFirst();
+        if (resultPark.isPresent()) {
+            Park firstHavePositionPark = resultPark.get();
+            return firstHavePositionPark;
         }
         return null;
     }

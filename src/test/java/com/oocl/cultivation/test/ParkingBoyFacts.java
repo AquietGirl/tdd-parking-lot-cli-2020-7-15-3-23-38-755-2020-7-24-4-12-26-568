@@ -26,11 +26,22 @@ class ParkingBoyFacts {
         return parkList;
     }
 
+    private ParkingBoy defaultParkingBoy(){
+        ParkingBoy parkingBoy = new ParkingBoy(defaultParkCount(1)) {
+            Park defaultPark = this.getParkList().get(0);
+            @Override
+            public Park choosePark(Car car) {
+                return defaultPark;
+            }
+        };
+        return parkingBoy;
+    }
+
     @Test
     void should_return_ticket_when_boy_parking_car() {
         //given
         Car car = new Car("car1");
-        ParkingBoy parkingBoy = new NoSmartParkingBoy(defaultParkCount(1));
+        ParkingBoy parkingBoy = defaultParkingBoy();
 
         //when
         Ticket actualTicket = parkingBoy.parkingCar(car);
@@ -43,7 +54,7 @@ class ParkingBoyFacts {
     @Test
     void should_return_car_when_boy_fetching_car() {
         //given
-        ParkingBoy parkingBoy = new NoSmartParkingBoy(defaultParkCount(1));
+        ParkingBoy parkingBoy = defaultParkingBoy();
         Ticket ticket = new Ticket("car1", new Car("car1"), new Park("park1", 10));
         parkingBoy.parkingCar(new Car("car1"));
 
@@ -62,7 +73,7 @@ class ParkingBoyFacts {
     @Test
     void should_return_correspond_when_boy_fetching_car() {
         //given
-        ParkingBoy parkingBoy = new NoSmartParkingBoy(defaultParkCount(1));
+        ParkingBoy parkingBoy = defaultParkingBoy();
         Car car = new Car("car1");
         Ticket ticket = parkingBoy.parkingCar(car);
 
@@ -85,7 +96,7 @@ class ParkingBoyFacts {
     @Test
     void should_return_null_when_boy_fetching_car_given_wrong_ticket() {
         //given
-        ParkingBoy parkingBoy = new NoSmartParkingBoy(defaultParkCount(1));
+        ParkingBoy parkingBoy = defaultParkingBoy();
         Ticket ticket = new Ticket("2", new Car("car1"), new Park("park1", 10));
         parkingBoy.parkingCar(new Car("car1"));
 
@@ -99,7 +110,7 @@ class ParkingBoyFacts {
     @Test
     void should_return_null_when_boy_fetching_car_given_no_ticket() {
         //given
-        ParkingBoy parkingBoy = new NoSmartParkingBoy(defaultParkCount(1));
+        ParkingBoy parkingBoy = defaultParkingBoy();
         Ticket ticket = null;
 
         //when
@@ -118,7 +129,7 @@ class ParkingBoyFacts {
     @Test
     void should_return_null_when_boy_fetching_car_given_used_ticket() {
         //given
-        ParkingBoy parkingBoy = new NoSmartParkingBoy(defaultParkCount(1));
+        ParkingBoy parkingBoy = defaultParkingBoy();
         Car car = new Car("car1");
         Ticket ticket = parkingBoy.parkingCar(car);
         parkingBoy.fetchingCar(ticket);
@@ -138,7 +149,7 @@ class ParkingBoyFacts {
     @Test
     void should_return_null_when_boy_parking_car_but_no_position() {
         //given
-        ParkingBoy parkingBoy = new NoSmartParkingBoy(defaultParkCount(1));
+        ParkingBoy parkingBoy = defaultParkingBoy();
         Car car = new Car("car1");
         parkingBoy.getParkList().forEach(park -> park.setEmptyPositionCount(0));
 
@@ -157,7 +168,7 @@ class ParkingBoyFacts {
     @Test
     void should_return_null_when_boy_parking_parked_car() {
         //given
-        ParkingBoy parkingBoy = new NoSmartParkingBoy(defaultParkCount(1));
+        ParkingBoy parkingBoy = defaultParkingBoy();
         Car car = new Car("car1");
         parkingBoy.parkingCar(car);
 
@@ -176,7 +187,7 @@ class ParkingBoyFacts {
     @Test
     void should_return_null_when_boy_parking_null_car() {
         //given
-        ParkingBoy parkingBoy = new NoSmartParkingBoy(defaultParkCount(1));
+        ParkingBoy parkingBoy = defaultParkingBoy();
         Car car = null;
 
         //when
@@ -194,7 +205,7 @@ class ParkingBoyFacts {
     @Test
     void should_return_unrecognized_parking_ticket_when_boy_fetching_car_given_wrong_ticket() {
         //given
-        ParkingBoy parkingBoy = new NoSmartParkingBoy(defaultParkCount(1));
+        ParkingBoy parkingBoy = defaultParkingBoy();
         Ticket ticket = new Ticket("2", new Car("car1"), new Park("park1", 10));
         parkingBoy.fetchingCar(ticket);
 
@@ -214,7 +225,7 @@ class ParkingBoyFacts {
     @Test
     void should_return_please_provide_your_parking_ticket_when_boy_fetching_car_given_no_ticket() {
         //given
-        ParkingBoy parkingBoy = new NoSmartParkingBoy(defaultParkCount(1));
+        ParkingBoy parkingBoy = defaultParkingBoy();
         Ticket ticket = null;
         parkingBoy.fetchingCar(ticket);
 
@@ -233,7 +244,7 @@ class ParkingBoyFacts {
     @Test
     void should_return_not_enough_position_when_boy_parking_car_but_not_position_given_car() {
         //given
-        ParkingBoy parkingBoy = new NoSmartParkingBoy(defaultParkCount(1));
+        ParkingBoy parkingBoy =defaultParkingBoy();
         parkingBoy.getParkList().forEach(park -> park.setEmptyPositionCount(0));
         parkingBoy.parkingCar(new Car("car1"));
 
@@ -252,12 +263,12 @@ class ParkingBoyFacts {
     @Test
     void should_return_car_in_park2_when_boy_parking_car_but_park1_is_full_given_car() {
         //given
-        ParkingBoy parkingBoy = new NoSmartParkingBoy(defaultParkCount(2));
+        ParkingBoy noSmartParkingBoy = new NoSmartParkingBoy(defaultParkCount(2));
         Car car = new Car("car1");
-        parkingBoy.getParkList().get(0).setEmptyPositionCount(0);
+        noSmartParkingBoy.getParkList().get(0).setEmptyPositionCount(0);
 
         //when
-        Ticket ticket = parkingBoy.parkingCar(car);
+        Ticket ticket = noSmartParkingBoy.parkingCar(car);
 
         //then
         Assertions.assertEquals("park2", ticket.getPark().getParkName());

@@ -12,12 +12,9 @@ public class SmartParkingBoy extends ParkingBoy {
 
     @Override
     public Park choosePark(Car car) {
-        if (isCanParkingCar(car)) {
-            List<Park> parks = this.getParkList().stream().sorted(Comparator.comparing(Park::getEmptyPositionCount).reversed()).collect(Collectors.toList());
-            Park morePositionPark = parks.get(0);
-            return morePositionPark;
-        }
-        return null;
+        List<Park> parks = this.getParkList().stream().sorted(Comparator.comparing(Park::getEmptyPositionCount).reversed()).collect(Collectors.toList());
+        Park morePositionPark = parks.get(0);
+        return morePositionPark;
     }
 
 }

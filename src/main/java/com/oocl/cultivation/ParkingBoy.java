@@ -44,12 +44,14 @@ public abstract class ParkingBoy {
     public abstract Park choosePark(Car car);
 
     public Ticket parkingCar(Car car) {
-        Park park = choosePark(car);
-        if (park != null) {
-            Ticket ticket = new Ticket(car.getCarNumber(), car, park);
-            this.getTicketList().add(ticket);
-            park.setEmptyPositionCount(park.getEmptyPositionCount() - 1);
-            return ticket;
+        if (isCanParkingCar(car)) {
+            Park park = choosePark(car);
+            if (park != null) {
+                Ticket ticket = new Ticket(car.getCarNumber(), car, park);
+                this.getTicketList().add(ticket);
+                park.setEmptyPositionCount(park.getEmptyPositionCount() - 1);
+                return ticket;
+            }
         }
         return null;
     }
