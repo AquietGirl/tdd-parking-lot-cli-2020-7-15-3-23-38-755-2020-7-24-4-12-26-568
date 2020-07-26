@@ -270,4 +270,24 @@ class ParkingBoyFacts {
         //then
         Assertions.assertEquals("park1", ticket.getPark().getParkName());
     }
+
+    /*
+    * Given  car
+    * When  boy parking car in park that have larger available position rate
+    * Then  car is in park that have larger available position rate
+    * */
+    @Test
+    void should_return_car_in_park_that_have_larger_available_position_rate() {
+        //given
+        ParkingBoy superParkingBoy = new SuperSmartParkingBoy();
+        Car car = new Car("car1");
+        superParkingBoy.getParkList().get(0).setEmptyPositionCount(3);
+        superParkingBoy.getParkList().get(1).setEmptyPositionCount(5);
+
+        //when
+        Ticket ticket = superParkingBoy.parkingCar(car);
+
+        //then
+        Assertions.assertEquals("park2", ticket.getPark().getParkName());
+    }
 }
