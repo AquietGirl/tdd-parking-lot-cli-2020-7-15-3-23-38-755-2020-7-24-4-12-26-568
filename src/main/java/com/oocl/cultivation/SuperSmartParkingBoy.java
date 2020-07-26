@@ -13,8 +13,8 @@ public class SuperSmartParkingBoy extends ParkingBoy {
     public Ticket parkingCar(Car car) {
         if (isCanParkingCar(car)) {
             Optional<Park> parks = this.getParkList().stream().reduce((x, y) -> {
-                int rateX = (x.getEmptyPositionCount() / 10);
-                int rateY = (y.getEmptyPositionCount() / 10);
+                int rateX = (x.getEmptyPositionCount() / x.getCapacity());
+                int rateY = (y.getEmptyPositionCount() / y.getCapacity());
                 return rateX > rateY ? x : y;
             });
             if (parks.isPresent()){

@@ -3,10 +3,12 @@ package com.oocl.cultivation;
 public class Park {
     private int emptyPositionCount;
     private String parkName;
+    private int capacity;
 
-    public Park (String parkName) {
-        this.emptyPositionCount = 10;
+    public Park (String parkName, int capacity) {
         this.parkName = parkName;
+        this.capacity = capacity;
+        this.emptyPositionCount = capacity;
     }
 
     public int getEmptyPositionCount() {
@@ -19,5 +21,13 @@ public class Park {
 
     public String getParkName() {
         return parkName;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
 }
