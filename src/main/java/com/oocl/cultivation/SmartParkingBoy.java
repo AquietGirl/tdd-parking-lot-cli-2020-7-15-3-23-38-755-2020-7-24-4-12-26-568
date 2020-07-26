@@ -5,6 +5,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class SmartParkingBoy extends ParkingBoy {
+
+    public SmartParkingBoy(List<Park> parkList) {
+        super(parkList);
+    }
+
     @Override
     public Ticket parkingCar(Car car) {
         if (isCanParkingCar(car)) {

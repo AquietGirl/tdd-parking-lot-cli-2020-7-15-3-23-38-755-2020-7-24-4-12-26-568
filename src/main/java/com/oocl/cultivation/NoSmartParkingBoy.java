@@ -1,8 +1,14 @@
 package com.oocl.cultivation;
 
+import java.util.List;
 import java.util.Optional;
 
 public class NoSmartParkingBoy extends ParkingBoy {
+
+    public NoSmartParkingBoy(List<Park> parkList) {
+        super(parkList);
+    }
+
     @Override
     public Ticket parkingCar(Car car) {
         if (isCanParkingCar(car)) {

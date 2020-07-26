@@ -12,11 +12,9 @@ public abstract class ParkingBoy {
     private String ticketMessage;
     private String parkMessage;
 
-    public ParkingBoy() {
+    public ParkingBoy(List<Park> parkList) {
         ticketList = new ArrayList<>();
-        parkList = new ArrayList<>();
-        parkList.add(new Park("park1"));
-        parkList.add(new Park("park2"));
+        this.parkList = parkList;
     }
 
     public void setTicketMessage(String ticketMessage) {
@@ -74,7 +72,7 @@ public abstract class ParkingBoy {
 
     private boolean hasCarPosition() {
         List<Park> parks = parkList.stream().filter(park -> park.getEmptyPositionCount() != 0).collect(Collectors.toList());
-        if (parks.size() > 0) {
+        if (!parks.isEmpty()) {
             return true;
         }
         parkMessage = "Not enough position.";
